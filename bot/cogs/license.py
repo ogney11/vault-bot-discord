@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from bot.services.api import api_get
+from bot.services.discord_api import api_get
 
 class License(commands.Cog):
     def __init__(self, bot):
