@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     app_name: str = "Vault"
     api_prefix: str = "/api/v1"
-    database_url: str = "postgresql+asyncpg://vault:vault@localhost:5432/vault"
+    database_url: str = "mysql+aiomysql://vault:vault@localhost:3306/vault"
     redis_url: str = "redis://localhost:6379/0"
     debug: bool = False
 

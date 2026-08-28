@@ -28,15 +28,16 @@ services:
       - redis
 
   db:
-    image: postgres:16
+    image: mysql:8
     environment:
-      POSTGRES_USER: vault
-      POSTGRES_PASSWORD: vault
-      POSTGRES_DB: vault
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vault
+      MYSQL_USER: vault
+      MYSQL_PASSWORD: vault
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - dbdata:/var/lib/mysql
 
   redis:
     image: redis:7
@@ -44,4 +45,4 @@ services:
       - "6379:6379"
 
 volumes:
-  pgdata:
+  dbdata:

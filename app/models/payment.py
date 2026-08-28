@@ -1,6 +1,6 @@
 import uuid
 from sqlalchemy import String, BigInteger, ForeignKey, Index, DateTime, JSON
-from sqlalchemy.dialects.postgresql import UUID
+from app.db.uuid import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
 from app.models.mixins import TimestampMixin
