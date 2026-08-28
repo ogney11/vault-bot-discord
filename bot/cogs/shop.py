@@ -1,35 +1,38 @@
 import discord
+from discord import app_commands
 from discord.ext import commands
+
 from bot.services.discord_api import api_get
+
 
 class Shop(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name="shop", description="Browse all available products")
-    async def shop(self, ctx):
-        # Fetch products from the API for this guild
-        guild_id = ctx.guild.id
-        products = await api_get(f"/discord/guilds/{guild_id}/products")
+    @app_commands.command(name="shop", description="Browse all available products")
+    async def shop(self, interaction: discord.Interaction):
+        guild_id = interaction.guild.id if interaction.guild else None
+        products = await api_get(f"/discord/guilds/{guild_id}/products") if guild_id else []
         if not products:
             embed = discord.Embed(
                 title="Vault Shop",
                 description="No products available.",
-                color=discord.Color.blue()
+                color=discord.Color.blue(),
             )
         else:
             embed = discord.Embed(
                 title="Vault Shop",
                 description="Available products:",
-                color=discord.Color.blue()
+                color=discord.Color.blue(),
             )
             for p in products:
                 embed.add_field(
                     name=p["name"],
                     value=f"{p['price_minor']/100:.2f} {p['currency']}",
-                    inline=False
+                    inline=False,
                 )
-        await ctx.respond(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
-def setup(bot):
-    bot.add_cog(Shop(bot))
+
+async def setup(bot):
+    await bot.add_cog(Shop(bot))
