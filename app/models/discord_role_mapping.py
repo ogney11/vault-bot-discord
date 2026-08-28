@@ -20,6 +20,6 @@ class DiscordRoleMapping(Base, TimestampMixin):
     resource_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
     action: Mapped[str] = mapped_column(String(20), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
-    metadata: Mapped[dict] = mapped_column(JSON, default=dict, nullable=False)
+    metadata_json: Mapped[dict] = mapped_column("metadata", JSON, default=dict, nullable=False)
 
     workspace: Mapped["Workspace"] = relationship(back_populates="role_mappings")

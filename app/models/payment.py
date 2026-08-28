@@ -23,7 +23,7 @@ class Payment(Base, TimestampMixin):
     status: Mapped[str] = mapped_column(String(30), nullable=False)
     refunded_amount_minor: Mapped[int] = mapped_column(BigInteger, default=0, nullable=False)
     fee_minor: Mapped[int] = mapped_column(BigInteger, default=0, nullable=False)
-    metadata: Mapped[dict] = mapped_column(JSON, default=dict, nullable=False)
+    metadata_json: Mapped[dict] = mapped_column("metadata", JSON, default=dict, nullable=False)
 
     workspace: Mapped["Workspace"] = relationship()
     order: Mapped["Order"] = relationship(back_populates="payments")

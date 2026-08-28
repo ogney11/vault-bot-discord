@@ -11,7 +11,6 @@ class Product(Base, TimestampMixin):
     __table_args__ = (
         Index("ix_products_workspace_slug", "workspace_id", "slug", unique=True),
         CheckConstraint("price_minor >= 0", name="ck_product_price_non_negative"),
-        CheckConstraint("currency ~ '^[A-Z]{3}$'", name="ck_product_currency_format"),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)

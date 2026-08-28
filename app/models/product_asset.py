@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import String, ForeignKey, Index, DateTime
+from sqlalchemy import String, ForeignKey, Index, DateTime, BigInteger
 from app.db.uuid import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
